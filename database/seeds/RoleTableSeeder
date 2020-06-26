@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use GeniusTS\Roles\Models\Role;
+
+class RoleTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $adminRoles =[
+        [
+    'name' => 'Admin',
+    'slug' => 'admin',
+    'description' => 'admin', // optional
+    'level' => 1, // optional, set to 1 by default
+     ], 
+     [
+     'name' => 'general-user',
+    'slug' => 'general-user',
+    'description' => 'general', // optional
+    'level' => 1, // optional, set to 1 by default
+     ]
+     ];
+     foreach ($adminRoles as $key => $value) {
+     	Role::create($value);
+     }
+        
+
+      
+       }
+
+}

@@ -1,0 +1,45 @@
+SELECT collisions.collision_price, comprehensives.comprehensive_price,car_rate_groups.car_pricing_rating FROM collisions
+JOIN premiums on collisions.premium_id = premiums.id
+JOIN comprehensives ON comprehensives.premium_id = premiums.id
+JOIN groups_factors ON collisions.group_factor_id = groups_factors.id
+JOIN car_rate_groups ON groups_factors.car_rate_group_id = car_rate_groups.id
+WHERE premiums.effect_date = "2020-02-01" AND car_rate_groups.car_pricing_rating = 50
+
+SELECT groups_factors.id, collisions.collision_price FROM groups_factors
+JOIN car_rate_groups ON car_rate_groups.id = groups_factors.car_rate_group_id
+JOIN collisions on collisions.group_factor_id = groups_factors.id
+JOIN premiums ON collisions.premium_id = premiums.id
+WHERE car_rate_groups.car_pricing_rating = 75 AND premiums.id = 1
+
+
+SELECT collisions.collision_price FROM premiums
+JOIN collisions on collisions.premium_id = premiums.id
+JOIN comprehensives ON comprehensives.premium_id = premiums.id
+JOIN groups_factors ON collisions.group_factor_id = groups_factors.id
+JOIN car_rate_groups ON groups_factors.car_rate_group_id = car_rate_groups.id
+WHERE premiums.id = 1
+
+
+SELECT comprehensives.comprehensive_price FROM premiums
+JOIN comprehensives ON comprehensives.premium_id = premiums.id
+JOIN groups_factors ON comprehensives.group_factor_id = groups_factors.id
+JOIN car_rate_groups ON groups_factors.car_rate_group_id = car_rate_groups.id
+WHERE premiums.id = 1 AND car_rate_groups.car_pricing_rating =175
+
+
+
+#Comprehesive
+SELECT comprehensives.comprehensive_price FROM premiums
+JOIN comprehensives on comprehensives.premium_id = premiums.id
+JOIN groups_factors ON comprehensives.group_factor_id = groups_factors.id
+JOIN car_rate_groups ON groups_factors.car_rate_group_id = car_rate_groups.id
+WHERE premiums.effect_date = "2020-02-01" AND car_rate_groups.car_pricing_rating = 100
+
+
+
+#Collisions
+SELECT collisions.collision_price FROM premiums JOIN collisions on collisions.premium_id = premiums.id JOIN groups_factors ON collisions.group_factor_id = groups_factors.id JOIN car_rate_groups ON groups_factors.car_rate_group_id = car_rate_groups.id WHERE premiums.effect_date = "2020-02-01" AND car_rate_groups.car_pricing_rating = 50
+
+
+#Liabilty
+SELECT liabilitiys.liability_price FROM liabilitiys JOIN premiums ON premiums.id = liabilitiys.premium_id JOIN class_factors on liabilitiys.class_factor_id = class_factors.id WHERE class_factors.min_radius < 161 AND 161 < class_factors.max_radius AND premiums.effect_date = "2020-02-01"
